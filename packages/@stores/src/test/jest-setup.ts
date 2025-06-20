@@ -1,20 +1,11 @@
 import '@testing-library/jest-dom';
 import React from 'react';
+import { queryClient } from '../queryClient';
 
-// Mock React Query
-jest.mock('@tanstack/react-query', () => {
-  const original = jest.requireActual('@tanstack/react-query');
-  return {
-    ...original,
-    QueryClient: jest.fn().mockImplementation(() => ({
-      ...original.QueryClient.prototype,
-      setDefaultOptions: jest.fn(),
-      mount: jest.fn(),
-      unmount: jest.fn(),
-      clear: jest.fn(),
-    })),
-    QueryClientProvider: ({ children }: { children: React.ReactNode }) => children,
-  };
+// Reset the QueryClient before each test
+beforeEach(() => {
+  // Clear the QueryClient to avoid test interference
+  queryClient.clear();
 });
 
 // Configure React 18's act environment

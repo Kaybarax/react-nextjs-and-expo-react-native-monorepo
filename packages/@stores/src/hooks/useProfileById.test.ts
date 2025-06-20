@@ -1,10 +1,9 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '../queryClient';
 import { useProfileById } from './useProfileById';
 import { fetchProfileById } from '@shared/services/src/api/profiles';
 import { validateProfile } from '@shared/schemas/src/validation';
-import React from 'react';
+import { createWrapper } from '../test-utils';
+import { queryClient } from '../queryClient';
 
 // Mock the fetchProfileById function
 jest.mock('@shared/services/src/api/profiles', () => ({
@@ -20,9 +19,8 @@ jest.mock('@shared/schemas/src/validation', () => ({
 const mockedFetchProfileById = fetchProfileById as jest.MockedFunction<typeof fetchProfileById>;
 const mockedValidateProfile = validateProfile as jest.MockedFunction<typeof validateProfile>;
 
-// Define a wrapper for the tests
-const wrapper = ({ children }: { children: React.ReactNode }) =>
-  React.createElement(QueryClientProvider, { client: queryClient }, children);
+// Create a wrapper for the tests
+const wrapper = createWrapper();
 
 describe('useProfileById', () => {
   beforeEach(() => {

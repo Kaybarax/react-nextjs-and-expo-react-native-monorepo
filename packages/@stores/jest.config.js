@@ -17,6 +17,7 @@ const config = {
     '^@shared/services/(.*)$': '<rootDir>/../@services/$1',
     '^@schemas/(.*)$': '<rootDir>/../@schemas/$1',
   },
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 };
 
 export default config;
