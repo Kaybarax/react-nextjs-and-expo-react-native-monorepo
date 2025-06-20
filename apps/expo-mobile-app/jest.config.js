@@ -1,9 +1,14 @@
 module.exports = {
-  preset: 'jest-expo',
+  // We're not using jest-expo preset directly to avoid conflicts
+  // Instead, we're configuring the necessary parts manually
+  testEnvironment: 'jsdom',
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
+    'node_modules/(?!(react-native|@react-native|react-native-reanimated|@testing-library/react-native|expo|@expo|@unimodules|@react-navigation|@react-native-community)/)',
   ],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { configFile: './babel.config.js' }],
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   setupFilesAfterEnv: ['<rootDir>/test/jest-setup.ts'],
   collectCoverage: true,
   collectCoverageFrom: [
@@ -13,4 +18,7 @@ module.exports = {
     '!**/babel.config.js',
     '!**/jest.setup.js',
   ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
 };

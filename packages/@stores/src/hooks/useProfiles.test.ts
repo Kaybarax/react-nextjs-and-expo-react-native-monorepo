@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../queryClient';
 import { useProfiles } from './useProfiles';
@@ -20,8 +20,8 @@ jest.mock('@shared/schemas/src/validation', () => ({
 const mockedFetchProfiles = fetchProfiles as jest.MockedFunction<typeof fetchProfiles>;
 const mockedValidateProfile = validateProfile as jest.MockedFunction<typeof validateProfile>;
 
-// Define a wrapper component for the tests
-const Wrapper = ({ children }: { children: React.ReactNode }) =>
+// Define a wrapper for the tests
+const wrapper = ({ children }: { children: React.ReactNode }) =>
   React.createElement(QueryClientProvider, { client: queryClient }, children);
 
 describe('useProfiles', () => {
@@ -44,7 +44,7 @@ describe('useProfiles', () => {
 
     // Render the hook with the QueryClientProvider wrapper
     const { result } = renderHook(() => useProfiles(), {
-      wrapper: Wrapper,
+      wrapper,
     });
 
     // Assert that the hook initially returns isLoading: true
@@ -75,12 +75,12 @@ describe('useProfiles', () => {
     }));
 
     // Render the hook with the QueryClientProvider wrapper
-    const { result, waitForNextUpdate } = renderHook(() => useProfiles(), {
-      wrapper: Wrapper,
+    const { result } = renderHook(() => useProfiles(), {
+      wrapper,
     });
 
     // Wait for the query to complete
-    await waitForNextUpdate();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     // Assert that the hook returns the validated data
     expect(result.current.isLoading).toBe(false);
@@ -98,12 +98,12 @@ describe('useProfiles', () => {
     mockedFetchProfiles.mockResolvedValue({ error: errorMessage });
 
     // Render the hook with the QueryClientProvider wrapper
-    const { result, waitForNextUpdate } = renderHook(() => useProfiles(), {
-      wrapper: Wrapper,
+    const { result } = renderHook(() => useProfiles(), {
+      wrapper,
     });
 
     // Wait for the query to complete
-    await waitForNextUpdate();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     // Assert that the hook returns an error
     expect(result.current.isLoading).toBe(false);
@@ -145,12 +145,12 @@ describe('useProfiles', () => {
     });
 
     // Render the hook with the QueryClientProvider wrapper
-    const { result, waitForNextUpdate } = renderHook(() => useProfiles(), {
-      wrapper: Wrapper,
+    const { result } = renderHook(() => useProfiles(), {
+      wrapper,
     });
 
     // Wait for the query to complete
-    await waitForNextUpdate();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     // Assert that the hook returns only the valid profile
     expect(result.current.isLoading).toBe(false);

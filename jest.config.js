@@ -30,6 +30,8 @@ module.exports = {
     {
       displayName: '@shared/stores',
       testMatch: ['<rootDir>/packages/@stores/src/**/*.test.ts'],
+      testEnvironment: 'jsdom',
+      setupFilesAfterEnv: ['<rootDir>/packages/@stores/src/test/jest-setup.ts'],
       transform: {
         '^.+\\.tsx?$': [
           'ts-jest',
@@ -70,7 +72,7 @@ module.exports = {
       setupFilesAfterEnv: ['<rootDir>/test/jest-setup.ts'],
       testMatch: ['<rootDir>/**/*.test.{ts,tsx}'],
       transformIgnorePatterns: [
-        'node_modules/(?!(react-native|@react-native|react-native-reanimated|@testing-library/react-native)/)',
+        'node_modules/(?!(react-native|@react-native|react-native-reanimated|@testing-library/react-native|expo|@expo|@unimodules|@react-navigation|@react-native-community)/)',
       ],
       transform: {
         '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { configFile: './babel.config.js' }],
