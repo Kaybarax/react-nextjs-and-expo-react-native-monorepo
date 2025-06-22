@@ -11,7 +11,7 @@
     { "path": "./packages/@configs" },
     { "path": "./packages/@mobile-ui" },
     { "path": "./packages/@schemas" },
-    { "path": "./packages/@shared" },
+    { "path": "./packages/@services" },
     { "path": "./packages/@stores" },
     { "path": "./packages/@web-ui" }
   ]

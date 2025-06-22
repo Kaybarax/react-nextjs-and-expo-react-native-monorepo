@@ -40,7 +40,7 @@
     "build": "yarn build:configs:tokens && yarn build:schemas && yarn build:services && yarn build:stores && yarn build:mobile-ui && yarn build:web-ui",
     "turbo:build": "turbo run build",
     "turbo": "dotenv -- npx turbo run deploy",
-    "clean": "node scripts/cleanup.js",
+    "cleanup": "node scripts/cleanup.js",
     "test": "jest --config=jest.config.js",
     "test:web": "cd apps/nextjs-web-app && jest --config=jest.config.js",
     "test:mobile": "cd apps/expo-mobile-app && jest --config=jest.config.js",

@@ -72,7 +72,7 @@ export const fetchProfileById = async (
 
   const fetchWithRetry = async (): Promise<Profile | { error: string }> => {
     try {
-      const response = await axios.get(`'https://dummyjson.com/users/${profileId}`, {
+      const response = await axios.get(`https://dummyjson.com/users/${profileId}`, {
         headers: {
           'Content-Type': 'application/json',
         },

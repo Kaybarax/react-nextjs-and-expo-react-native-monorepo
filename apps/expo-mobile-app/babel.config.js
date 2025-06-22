@@ -9,6 +9,8 @@ module.exports = function (api) {
       '@babel/preset-typescript'
     ],
     plugins: [
+      'expo-router/babel',
+      'nativewind/babel',
       'react-native-reanimated/plugin',
       '@babel/plugin-transform-flow-strip-types',
       ['@babel/plugin-proposal-class-properties', { loose: true }],

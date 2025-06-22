@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     // Make the request to the external API
-    const response = await fetch('https://dummyjson.com/docs/users#users-all', {
+    const response = await fetch('https://dummyjson.com/docs/users', {
       headers: {
         'Content-Type': 'application/json',
       },
