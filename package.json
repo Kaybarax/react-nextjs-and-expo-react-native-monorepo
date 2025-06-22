@@ -44,7 +44,6 @@
     "test": "jest --config=jest.config.js",
     "test:web": "cd apps/nextjs-web-app && jest --config=jest.config.js",
     "test:mobile": "cd apps/expo-mobile-app && jest --config=jest.config.js",
-    "turbo:test": "turbo run test",
     "storybook:web": "yarn workspace @shared/web-ui-dev storybook",
     "storybook:mobile": "yarn workspace @shared/mobile-ui-dev storybook",
     "backstop:reference": "backstop reference --config=backstop.config.js",
