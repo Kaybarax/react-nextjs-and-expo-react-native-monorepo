@@ -35,40 +35,35 @@ npm run reset-project
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## NativeWind CSS
+## Styling
 
-This project uses [NativeWind](https://www.nativewind.dev/) for styling, which brings the power of Tailwind CSS to React Native.
+This project uses React Native's built-in styling system with StyleSheet.
 
-### Usage
+### Example
 
-1. Import the styled function from nativewind:
+```jsx
+import { StyleSheet, Text, View } from 'react-native';
 
-   ```jsx
-   import { styled } from 'nativewind';
-   ```
+export default function MyComponent() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Hello World</Text>
+    </View>
+  );
+}
 
-2. Create styled components:
-
-   ```jsx
-   const StyledView = styled(View);
-   const StyledText = styled(Text);
-   ```
-
-3. Use Tailwind classes in your components:
-
-   ```jsx
-   <StyledView className="flex-1 justify-center items-center">
-     <StyledText className="text-lg font-bold">Hello World</StyledText>
-   </StyledView>
-   ```
-
-### Configuration
-
-The NativeWind configuration is set up in the following files:
-
-- `tailwind.config.js`: Tailwind CSS configuration
-- `babel.config.js`: Babel configuration with NativeWind plugin
-- `global.css`: Global CSS file with Tailwind directives
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+```
 
 ## Learn more
 
@@ -76,7 +71,7 @@ To learn more about developing your project with Expo, look at the following res
 
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-- [NativeWind documentation](https://www.nativewind.dev/): Learn how to use Tailwind CSS in React Native.
+- [React Native documentation](https://reactnative.dev/docs/style): Learn more about styling in React Native.
 
 ## Join the community
 
