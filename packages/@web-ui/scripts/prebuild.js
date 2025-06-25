@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 
 // Paths
 const distDir = path.resolve(__dirname, '../dist');
-const webUiDevLibDir = path.resolve(__dirname, '../../web-ui-dev/src/lib');
+const webUiDevLibDir = path.resolve(__dirname, '../../../development/web-ui-dev/src/lib');
 const webUiLibDir = path.resolve(__dirname, '../lib');
 
 // Function to ensure a directory exists

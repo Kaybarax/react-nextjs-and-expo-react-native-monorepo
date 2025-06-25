@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import TestButtonComponent from '../lib/components/TestButtonComponent';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import TestButtonComponent from '../lib/components/TestButtonComponent.tsx';
 
 const meta = {
   title: 'Components/TestButtonComponent',

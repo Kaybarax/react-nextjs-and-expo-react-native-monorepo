@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import TestButtonComponent from './TestButtonComponent';
+import TestButtonComponent from './TestButtonComponent.tsx';
 
 describe('TestButtonComponent', () => {
   test('renders the button with default props', () => {

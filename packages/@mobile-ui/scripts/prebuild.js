@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 
 // Paths
 const distDir = path.resolve(__dirname, '../dist');
-const mobileUiDevLibDir = path.resolve(__dirname, '../../mobile-ui-dev/lib');
+const mobileUiDevLibDir = path.resolve(__dirname, '../../../development/mobile-ui-dev/lib');
 const mobileUiLibDir = path.resolve(__dirname, '../lib');
 
 // Function to ensure a directory exists
