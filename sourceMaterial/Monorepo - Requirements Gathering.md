@@ -72,6 +72,7 @@
 
     - Use **Next.js** as the development and build framework (no CRA)
     - Organize code into:
+
       - `/components` for app-specific UI
       - `/app` or `/pages` for route-based layouts (leveraging Next.js routing)
       - `/services` for wrappers around shared `services`
@@ -108,6 +109,7 @@
   - ## **Package-Level READMEs**
 
     - **`services/README.md`**
+
       - Instructions for handling CORS in development via **Next.js rewrites/middleware**
 
     - **`apps/nextjs-web-app/README.md`**

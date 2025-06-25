@@ -5,8 +5,6 @@ import { queryClient } from './queryClient';
 // Create a wrapper component for tests that need QueryClientProvider
 export const createWrapper = () => {
   return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };

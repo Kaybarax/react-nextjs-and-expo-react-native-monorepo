@@ -107,11 +107,7 @@ jest.mock('../app/index', () => {
       return require('react').createElement(
         require('react-native').View,
         null,
-        require('react').createElement(
-          require('react-native').Text,
-          null,
-          'Edit app/index.tsx to edit this screen.'
-        )
+        require('react').createElement(require('react-native').Text, null, 'Edit app/index.tsx to edit this screen.'),
       );
     },
   };
