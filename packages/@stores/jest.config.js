@@ -21,9 +21,7 @@ const config = {
     '^@shared/schemas/(.*)$': '<rootDir>/../@schemas/$1',
     '^@shared/schemas/src/generated/(.+)\\.js$': '<rootDir>/../@schemas/src/generated/$1.ts',
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(@shared/schemas|@shared/services)/)'
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(@shared/schemas|@shared/services)/)'],
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 };
