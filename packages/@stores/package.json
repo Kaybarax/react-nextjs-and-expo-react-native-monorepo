@@ -6,10 +6,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
     "prebuild": "node --loader ts-node/esm scripts/prebuild.js",
-    "build": "tsc --build",
+    "build": "yarn clean && tsc --build",
     "postbuild": "node --loader ts-node/esm scripts/postbuild.js",
-    "clean": "rimraf dist",
     "lint": "eslint src --ext .ts,.tsx",
     "test": "jest --passWithNoTests"
   },

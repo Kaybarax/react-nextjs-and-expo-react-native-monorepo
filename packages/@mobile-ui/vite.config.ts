@@ -17,10 +17,9 @@ export default defineConfig({
     },
     copyPublicDir: false,
   },
-  // css: {
-  //   postcss: {
-  //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //     plugins: [tailwindcss],
-  //   },
-  // },
+  css: {
+    postcss: {
+      plugins: [tailwindcss],
+    },
+  },
 });

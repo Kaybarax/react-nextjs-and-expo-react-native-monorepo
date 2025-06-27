@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchProfiles } from '@shared/services/src/api/profiles';
-import { validateProfile } from '@shared/schemas/src/validation';
+import { fetchProfiles } from '@shared/services';
+import { validateProfile } from '@shared/schemas';
 
 /**
  * Hook for fetching and managing profile data

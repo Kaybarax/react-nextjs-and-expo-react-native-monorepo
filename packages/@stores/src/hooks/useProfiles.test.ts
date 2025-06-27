@@ -1,17 +1,17 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { useProfiles } from './useProfiles';
-import { fetchProfiles } from '@shared/services/src/api/profiles';
-import { validateProfile } from '@shared/schemas/src/validation';
+import { fetchProfiles } from '@shared/services';
+import { validateProfile } from '@shared/schemas';
 import { createWrapper } from '../test-utils';
 import { queryClient } from '../queryClient';
 
 // Mock the fetchProfiles function
-jest.mock('@shared/services/src/api/profiles', () => ({
+jest.mock('@shared/services', () => ({
   fetchProfiles: jest.fn(),
 }));
 
 // Mock the validateProfile function
-jest.mock('@shared/schemas/src/validation', () => ({
+jest.mock('@shared/schemas', () => ({
   validateProfile: jest.fn(),
 }));
 

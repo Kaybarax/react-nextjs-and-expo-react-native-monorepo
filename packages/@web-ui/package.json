@@ -7,10 +7,10 @@
   "types": "dist/main.d.ts",
   "scripts": {
     "dev": "vite",
+    "clean": "rimraf dist && rimraf lib",
     "prebuild": "node scripts/prebuild.js",
-    "build": "yarn run prebuild && tsc --p tsconfig.build.json && vite build",
-    "preview": "vite preview",
-    "clean": "rimraf dist && rimraf lib"
+    "build": "yarn clean && yarn run prebuild && tsc --p tsconfig.build.json && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@shared/configs": "1.0.0",

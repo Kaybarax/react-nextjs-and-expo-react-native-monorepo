@@ -2,13 +2,12 @@
   "name": "@shared/schemas",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "generate-types": "node --loader ts-node/esm src/generate-types.ts",
-    "build": "yarn generate-types && tsc --build",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
+    "generate-types": "ts-node src/generate-types.ts",
+    "build": "yarn clean && yarn generate-types && tsc",
     "lint": "eslint src --ext .ts,.tsx",
     "test": "yarn generate-types && jest --passWithNoTests"
   },

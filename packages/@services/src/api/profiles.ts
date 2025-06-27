@@ -144,7 +144,6 @@ export const fetchProfiles = async (maxRetries = 3, retryDelay = 1000): Promise<
 
   const fetchWithRetry = async (): Promise<ApiResponse> => {
     try {
-      // Use a different CORS proxy to access the API
       const apiUrl = 'https://dummyjson.com/users';
 
       console.log(`Fetching profiles from: ${apiUrl} via axios with CORS enabled`);

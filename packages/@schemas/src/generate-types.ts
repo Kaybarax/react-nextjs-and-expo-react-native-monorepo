@@ -1,13 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { zodToTs } from 'zod-to-ts';
-import { ProfileSchema } from './profile.js';
-import { UserSchema } from './types.js';
+import { ProfileSchema } from './profile';
+import { UserSchema } from './types';
 
-// Get the directory name
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Declare __dirname for TypeScript
+declare const __dirname: string;
 
 // Directory where generated types will be saved
 const outputDir = path.resolve(__dirname, '../src/generated');
@@ -55,8 +53,8 @@ export type User = {
 fs.writeFileSync(
   path.join(outputDir, 'index.ts'),
   `// This file is auto-generated. Do not edit manually.
-export * from './profile.types.js';
-export * from './user.types.js';
+export * from './profile.types';
+export * from './user.types';
 `,
 );
 
