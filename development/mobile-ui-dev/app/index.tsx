@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { useState, useRef } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Animated, Dimensions } from 'react-native';
 import { TestMobileButtonComponent } from '../lib/components/Button/TestMobileButtonComponent';
 
 // List of available components
@@ -16,6 +16,18 @@ const COMPONENTS = [
 
 export default function Index() {
   const [selectedComponent, setSelectedComponent] = useState(COMPONENTS[0]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const drawerAnimation = useRef(new Animated.Value(1)).current;
+
+  const toggleDrawer = () => {
+    const toValue = isDrawerOpen ? 0 : 1;
+    Animated.timing(drawerAnimation, {
+      toValue,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   const renderComponentVariants = () => {
     if (!selectedComponent) return null;
@@ -45,10 +57,16 @@ export default function Index() {
     );
   };
 
+  // Calculate drawer width based on animation value
+  const drawerWidth = drawerAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 250],
+  });
+
   return (
     <View style={styles.container}>
       {/* Left Drawer */}
-      <View style={styles.drawer}>
+      <Animated.View style={[styles.drawer, { width: drawerWidth }]}>
         <Text style={styles.drawerTitle}>Components</Text>
         <ScrollView>
           {COMPONENTS.map(comp => (
@@ -65,10 +83,15 @@ export default function Index() {
             </TouchableOpacity>
           ))}
         </ScrollView>
-      </View>
+      </Animated.View>
 
       {/* Main Content Area */}
-      <ScrollView style={styles.content}>{renderComponentVariants()}</ScrollView>
+      <View style={styles.contentContainer}>
+        <TouchableOpacity onPress={toggleDrawer} style={styles.drawerToggle}>
+          <Text style={styles.drawerToggleText}>{isDrawerOpen ? '◀' : '▶'}</Text>
+        </TouchableOpacity>
+        <ScrollView style={styles.content}>{renderComponentVariants()}</ScrollView>
+      </View>
     </View>
   );
 }
@@ -80,11 +103,39 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   drawer: {
-    width: 250,
     backgroundColor: '#fff',
     borderRightWidth: 1,
     borderRightColor: '#e0e0e0',
     padding: 16,
+    overflow: 'hidden',
+  },
+  contentContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  drawerToggle: {
+    width: 30,
+    height: 40,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+    borderRightWidth: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: '#e0e0e0',
+    marginTop: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  drawerToggleText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#666',
   },
   drawerTitle: {
     fontSize: 18,
@@ -112,6 +163,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 24,
+    paddingLeft: 16,
   },
   componentTitle: {
     fontSize: 24,
