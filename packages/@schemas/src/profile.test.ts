@@ -1,18 +1,28 @@
 // Import the ProfileSchema
-import { ProfileSchema } from './profile';
+import { ProfileSchema, parseProfile } from './profile';
 
 describe('ProfileSchema', () => {
   it('should successfully parse a valid profile object', () => {
     // Arrange
     const validProfile = {
-      id: '123456',
-      name: 'John Doe',
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act & Assert
@@ -26,13 +36,23 @@ describe('ProfileSchema', () => {
   it('should throw an error when id is missing', () => {
     // Arrange
     const invalidProfile = {
-      name: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act & Assert
@@ -41,16 +61,26 @@ describe('ProfileSchema', () => {
     }).toThrow();
   });
 
-  it('should throw an error when name is missing', () => {
+  it('should throw an error when firstName is missing', () => {
     // Arrange
     const invalidProfile = {
-      id: '123456',
+      id: 1,
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act & Assert
@@ -62,14 +92,24 @@ describe('ProfileSchema', () => {
   it('should throw an error when age is not a number', () => {
     // Arrange
     const invalidProfile = {
-      id: '123456',
-      name: 'John Doe',
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
       age: '30', // String instead of number
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act & Assert
@@ -78,17 +118,27 @@ describe('ProfileSchema', () => {
     }).toThrow();
   });
 
-  it('should throw an error when imageUrl is not a valid URL', () => {
+  it('should throw an error when image is not a valid URL', () => {
     // Arrange
     const invalidProfile = {
-      id: '123456',
-      name: 'John Doe',
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'not-a-valid-url', // Invalid URL
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'not-a-valid-url', // Invalid URL
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act & Assert
@@ -96,42 +146,63 @@ describe('ProfileSchema', () => {
       ProfileSchema.parse(invalidProfile);
     }).toThrow();
   });
+});
 
-  it('should throw an error when interests is not an array', () => {
+describe('parseProfile', () => {
+  it('should successfully parse a valid profile object', () => {
     // Arrange
-    const invalidProfile = {
-      id: '123456',
-      name: 'John Doe',
+    const validProfile = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: 'coding, hiking, reading', // String instead of array
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
-    // Act & Assert
-    expect(() => {
-      ProfileSchema.parse(invalidProfile);
-    }).toThrow();
+    // Act
+    const result = parseProfile(validProfile);
+
+    // Assert
+    expect(result).toEqual(validProfile);
   });
 
-  it('should throw an error when lastActive is not a valid datetime string', () => {
+  it('should throw an error for an invalid profile object', () => {
     // Arrange
     const invalidProfile = {
-      id: '123456',
-      name: 'John Doe',
+      id: '1', // Invalid type
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: 'not-a-valid-datetime', // Invalid datetime
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act & Assert
-    expect(() => {
-      ProfileSchema.parse(invalidProfile);
-    }).toThrow();
+    expect(() => parseProfile(invalidProfile)).toThrow();
   });
 });

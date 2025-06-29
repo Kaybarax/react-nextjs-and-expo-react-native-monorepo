@@ -5,14 +5,24 @@ describe('validateProfile', () => {
   it('should return success true and validated data for a valid profile', () => {
     // Arrange
     const validProfile = {
-      id: '123456',
-      name: 'John Doe',
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act
@@ -27,13 +37,23 @@ describe('validateProfile', () => {
   it('should return success false and error message when id is missing', () => {
     // Arrange
     const invalidProfile = {
-      name: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'https://example.com/image.jpg',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'https://example.com/image.jpg',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act
@@ -46,17 +66,27 @@ describe('validateProfile', () => {
     expect(typeof result.error).toBe('string');
   });
 
-  it('should return success false and error message when imageUrl is not a valid URL', () => {
+  it('should return success false and error message when image is not a valid URL', () => {
     // Arrange
     const invalidProfile = {
-      id: '123456',
-      name: 'John Doe',
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      bio: 'Software developer with a passion for clean code',
-      location: 'New York',
-      imageUrl: 'not-a-valid-url',
-      interests: ['coding', 'hiking', 'reading'],
-      lastActive: new Date().toISOString(),
+      email: 'john.doe@example.com',
+      phone: '123-456-7890',
+      username: 'johndoe',
+      image: 'not-a-valid-url',
+      address: {
+        address: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        country: 'USA',
+      },
+      company: {
+        name: 'Acme Inc.',
+        title: 'Software Engineer',
+      },
     };
 
     // Act

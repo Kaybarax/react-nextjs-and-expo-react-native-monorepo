@@ -22,14 +22,24 @@ fs.writeFileSync(
   path.join(outputDir, 'profile.types.ts'),
   `// This file is auto-generated. Do not edit manually.
 export type Profile = {
-  id: string;
-  name: string;
+  id: number;
+  firstName: string;
+  lastName: string;
   age: number;
-  bio: string;
-  location: string;
-  imageUrl: string;
-  interests: string[];
-  lastActive: string;
+  email: string;
+  phone: string;
+  username: string;
+  image: string;
+  address: {
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+  };
+  company: {
+    name: string;
+    title: string;
+  };
 };
 `,
 );
