@@ -131,6 +131,7 @@ export const fetchProfileById = async (
   };
 
   const result = await withRetry(apiCall, maxRetries, retryDelay, 'Failed to fetch profile');
+  console.log('fetchProfileById result', result);
   if ('error' in result) {
     return result;
   }
@@ -141,19 +142,29 @@ export const fetchProfileById = async (
 
 /**
  * Fetches profiles from the API with a retry mechanism
+ * @param {number} limit - Number of profiles to fetch per page
+ * @param {number} skip - Number of profiles to skip (for pagination)
+ * @param {number} maxRetries - Maximum number of retry attempts
+ * @param {number} retryDelay - Delay between retry attempts in milliseconds
  */
-export const fetchProfiles = async (maxRetries = 3, retryDelay = 1000): Promise<ApiResponse> => {
+export const fetchProfiles = async (
+  limit = 10,
+  skip = 0,
+  maxRetries = 3,
+  retryDelay = 1000
+): Promise<ApiResponse> => {
   let retryCount = 0;
 
   const apiCall = async (): Promise<ValidatedProfile[]> => {
-    const response = await axios.get('https://dummyjson.com/users');
+    const response = await axios.get(`https://dummyjson.com/users?limit=${limit}&skip=${skip}`);
 
     if (!response || response.status !== 200) {
       throw new ApiError(response?.status || 500, response?.statusText || 'Unknown error');
     }
 
     // Handle proxy response format or direct API response
-    const data = response.data.contents ? JSON.parse(response.data.contents) : response.data;
+    const data = response?.data?.users ? response.data.users : [];
+    console.log('fetchProfiles data', data);
 
     // Skip validation on retry for test compatibility
     if (retryCount > 0) {
@@ -164,6 +175,7 @@ export const fetchProfiles = async (maxRetries = 3, retryDelay = 1000): Promise<
   };
 
   const result = await withRetry(apiCall, maxRetries, retryDelay, 'Failed to fetch profiles');
+  console.log('fetchProfiles result', result);
   if ('error' in result) {
     return result;
   }
