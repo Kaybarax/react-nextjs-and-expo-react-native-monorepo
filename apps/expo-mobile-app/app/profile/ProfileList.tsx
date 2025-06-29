@@ -80,51 +80,61 @@ export default function ProfileList({ HeaderComponent }: ProfileListProps) {
   return (
     <FlatList
       data={profiles}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => item?.id?.toString() || ""}
       ListHeaderComponent={HeaderComponent}
-      renderItem={({ item: profile }) => (
-        <View style={styles.profileCard}>
-          <Text style={styles.profileName}>{profile.firstName} {profile.lastName}</Text>
+      renderItem={({ item: profile }) => {
+        if (!profile) {
+          return null;
+        }
 
-          <View style={styles.profileDetail}>
-            <Text style={styles.profileLabel}>Age:</Text>
-            <Text>{profile.age}</Text>
+        return (
+          <View style={styles.profileCard}>
+            <Text style={styles.profileName}>{profile.firstName} {profile.lastName}</Text>
+
+            <View style={styles.profileDetail}>
+              <Text style={styles.profileLabel}>Age:</Text>
+              <Text>{profile.age}</Text>
+            </View>
+
+            <View style={styles.profileDetail}>
+              <Text style={styles.profileLabel}>Username:</Text>
+              <Text>{profile.username}</Text>
+            </View>
+
+            <View style={styles.profileDetail}>
+              <Text style={styles.profileLabel}>Email:</Text>
+              <Text>{profile.email}</Text>
+            </View>
+
+            <View style={styles.profileDetail}>
+              <Text style={styles.profileLabel}>Phone:</Text>
+              <Text>{profile.phone}</Text>
+            </View>
+
+            {profile.address && (
+              <View style={styles.profileDetail}>
+                <Text style={styles.profileLabel}>Address:</Text>
+                <Text>{profile.address.address}, {profile.address.city}, {profile.address.state}, {profile.address.country}</Text>
+              </View>
+            )}
+
+            {profile.company && (
+              <View style={styles.profileDetail}>
+                <Text style={styles.profileLabel}>Company:</Text>
+                <Text>{profile.company.name} - {profile.company.title}</Text>
+              </View>
+            )}
+
+            {profile.image && (
+              <Image 
+                source={{ uri: profile.image }} 
+                style={styles.profileImage} 
+                resizeMode="cover"
+              />
+            )}
           </View>
-
-          <View style={styles.profileDetail}>
-            <Text style={styles.profileLabel}>Username:</Text>
-            <Text>{profile.username}</Text>
-          </View>
-
-          <View style={styles.profileDetail}>
-            <Text style={styles.profileLabel}>Email:</Text>
-            <Text>{profile.email}</Text>
-          </View>
-
-          <View style={styles.profileDetail}>
-            <Text style={styles.profileLabel}>Phone:</Text>
-            <Text>{profile.phone}</Text>
-          </View>
-
-          <View style={styles.profileDetail}>
-            <Text style={styles.profileLabel}>Address:</Text>
-            <Text>{profile.address.address}, {profile.address.city}, {profile.address.state}, {profile.address.country}</Text>
-          </View>
-
-          <View style={styles.profileDetail}>
-            <Text style={styles.profileLabel}>Company:</Text>
-            <Text>{profile.company.name} - {profile.company.title}</Text>
-          </View>
-
-          {profile.image && (
-            <Image 
-              source={{ uri: profile.image }} 
-              style={styles.profileImage} 
-              resizeMode="cover"
-            />
-          )}
-        </View>
-      )}
+        );
+      }}
       contentContainerStyle={styles.listContent}
       onEndReached={() => {
         if (hasNextPage && !isFetchingNextPage) {
