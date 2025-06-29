@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import React from 'react';
 
 // Mock React Query
 jest.mock('@tanstack/react-query', () => {
@@ -11,7 +12,7 @@ jest.mock('@tanstack/react-query', () => {
       mount: jest.fn(),
       unmount: jest.fn(),
     })),
-    QueryClientProvider: ({ children }) => children,
+    QueryClientProvider: ({ children }: { children: React.ReactNode }) => children,
   };
 });
 

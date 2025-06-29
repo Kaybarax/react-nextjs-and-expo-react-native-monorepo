@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * API functions for fetching profile data
  */
@@ -148,21 +149,13 @@ export const fetchProfiles = async (maxRetries = 3, retryDelay = 1000): Promise<
 
       console.log(`Fetching profiles from: ${apiUrl} via axios with CORS enabled`);
       const startTime = Date.now();
-      const response = await axios.get(apiUrl, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,DELETE,PATCH,POST,PUT',
-          'Access-Control-Allow-Headers':
-            'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
-        },
-      });
+      const response = await axios.get(apiUrl);
       console.log(`Axios response received, status: ${response?.status || 'N/A'} ${response?.statusText || 'N/A'}`);
       console.log(`Axios response data:`, {
         status: response?.status,
         statusText: response?.statusText,
         headers: response?.headers,
+        data: response?.data,
         dataSize: response?.data ? JSON.stringify(response?.data).length : 0,
       });
       const endTime = Date.now();

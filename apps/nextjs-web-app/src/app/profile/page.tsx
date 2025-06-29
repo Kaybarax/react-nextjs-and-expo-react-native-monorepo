@@ -16,6 +16,7 @@ export default async function ProfilePage() {
 
   try {
     const profilesData = await fetchProfiles();
+    console.log('ProfilePage fetched profiles:', profilesData);
 
     // Check if there was an error
     if ('error' in profilesData) {
