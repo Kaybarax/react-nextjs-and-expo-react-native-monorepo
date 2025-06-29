@@ -23,7 +23,6 @@ export const ProfileSchema = z.object({
   }),
 });
 
-
 export type Profile = z.infer<typeof ProfileSchema>;
 
 export const parseProfile = (data: unknown): Profile => {
