@@ -42,6 +42,7 @@ export default function ProfileList() {
         nextPage: validatedProfiles.length === PROFILES_PER_PAGE ? pageParam + 1 : undefined,
       };
     },
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage,
   });
 
