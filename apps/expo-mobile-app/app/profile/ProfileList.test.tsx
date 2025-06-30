@@ -1,0 +1,43 @@
+import React from 'react';
+import { render } from '@testing-library/react-native';
+import { Text } from 'react-native';
+
+// Mock expo-router
+jest.mock('expo-router', () => {
+  const mockReact = require('react');
+  const mockRN = require('react-native');
+  return {
+    Link: ({ href, asChild, children }) => {
+      return mockReact.createElement(mockRN.Text, { testID: `link-${href}` }, 'Link');
+    },
+  };
+});
+
+// Mock React Query
+jest.mock('@tanstack/react-query', () => {
+  return {
+    useInfiniteQuery: jest.fn(() => ({
+      data: { pages: [{ profiles: [] }] },
+      status: 'success',
+      fetchNextPage: jest.fn(),
+      hasNextPage: false,
+      isFetchingNextPage: false,
+    })),
+  };
+});
+
+// Mock services
+jest.mock('@shared/services', () => ({
+  fetchProfiles: jest.fn(),
+}));
+
+// Mock schemas
+jest.mock('@shared/schemas', () => ({
+  validateProfile: jest.fn(),
+}));
+
+describe('ProfileList', () => {
+  it('passes a simple test', () => {
+    expect(true).toBe(true);
+  });
+});

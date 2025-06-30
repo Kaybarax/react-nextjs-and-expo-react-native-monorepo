@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useQuery } from '@tanstack/react-query';
 import { fetchProfiles } from '@shared/services';
 import { validateProfile } from '@shared/schemas';
