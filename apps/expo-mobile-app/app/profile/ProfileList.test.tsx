@@ -1,13 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
-import { Text } from 'react-native';
-
 // Mock expo-router
+
 jest.mock('expo-router', () => {
   const mockReact = require('react');
   const mockRN = require('react-native');
   return {
-    Link: ({ href, asChild, children }) => {
+    Link: ({ href }:{href:string}) => {
       return mockReact.createElement(mockRN.Text, { testID: `link-${href}` }, 'Link');
     },
   };
